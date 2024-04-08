@@ -2,6 +2,12 @@
 <html>
 <head>
    <?php
+      if (isset($_COOKIE["usr_name"])) {
+         echo "usr_name : " . $_COOKIE["usr_name"] . "<hr>";
+      }
+      if (isset($_COOKIE["usr_type"])) {
+         echo "usr_type : " . $_COOKIE["usr_type"] . "<hr>";
+      }
       echo "<h3> PHP List All POST Variables</h3>";
       foreach ($_POST as $key=>$val)
          echo $key." ".$val."<br/>";
@@ -260,19 +266,22 @@ echo"<br>";
 </div>
 
 
-<div>
-  <h2></h2>
-  <div class="p-5 bg-secondary text-white">
-    <p> Tanguy Courel, tanguy.courel@gmail.com , G1   </p>
-    <?php
-    echo date("Y") . '<img  src=" copyright.png" alt="droit auteur" width="20">';
-    echo "<br>";
-    
-    $host= gethostname();
-    $ip = gethostbyname($host);
-    echo"$ip";
-    ?>
-</div>
+   <div>
+   <div class="p-5 bg-secondary text-white">
+      <p> Tanguy Courel, tanguy.courel@gmail.com , G1   </p>
+      <?php
+      echo date("Y") . '<img  src=" copyright.png" alt="droit auteur" width="20">';
+      echo "<br>";
+      
+      $host= gethostname();
+      $ip = gethostbyname($host);
+      echo"$ip";
+
+      echo "<p> PHP List All Session Variables</p>";
+      foreach ($_SESSION as $key=>$val)
+         echo "<p>" . $key ." : " . $val . "</p>";
+      ?>
+   </div>
 
 </body>
 </html

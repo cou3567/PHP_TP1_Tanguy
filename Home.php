@@ -3,6 +3,7 @@
 <head>
    <?php
       session_start();
+      $id_session = session_id();
       $co;
       if (isset($_SESSION["Nom"]) xor isset($_SESSION["Visiteur"])){
          $co= true;
@@ -39,6 +40,12 @@
                   if(password_verify($_POST["pwd"] ,$hash_user[$i]['motdepasse'])){
                      $us_authenticated = true;
                      $co = true;
+                     setcookie('usr_name', $_POST["Pseudo"]);
+                     if ($_POST["Pseudo"] == 'admin') {
+                        setcookie('usr_type', 'admin');
+                     } else {
+                        setcookie('usr_type', 'single');
+                     }
                   }
                }
             }
@@ -79,7 +86,7 @@
             session_destroy();
                      
             echo "<br>";
-            echo "Bonjour " . $_SESSION["Nom"];
+            echo "Bonjour " . $_SESSION["Nom"] . " (id session: " . $id_session . ")";
             $co == false;
             }
          else {
@@ -198,7 +205,6 @@
    </div>
 
    <div>
-   <h2></h2>
    <div class="p-5 bg-secondary text-white">
       <p> Tanguy Courel, tanguy.courel@gmail.com , G1   </p>
       <?php
@@ -209,9 +215,9 @@
       $ip = gethostbyname($host);
       echo"$ip";
 
-      echo "<h3> PHP List All Session Variables</h3>";
+      echo "<p> PHP List All Session Variables</p>";
       foreach ($_SESSION as $key=>$val)
-         echo $key." ".$val."<br/>";
+         echo "<p>" . $key ." : " . $val . "</p>";
       ?>
    </div>
 
